@@ -31,4 +31,4 @@ Just drop me an email for now until I look into a Trello board or similar
 ## License ##
 Not yet defined
 
-##### *Powered by Raspberry Pi v2* #####
+##### *Designed and built on Raspberry Pi v2* #####
