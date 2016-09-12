@@ -7,8 +7,8 @@ import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import london.syntax.newsgeek.model.Post;
 import london.syntax.newsgeek.scraper.ValidatingScraper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
@@ -28,7 +28,7 @@ public class Application implements CommandLineRunner {
     @Value("${newsgeek.stories.max}")
     private int maxPosts;
 
-    private static final Logger logger = LogManager.getLogger(Application.class);
+    private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
     private ValidatingScraper hackerNewsScraper;
 
@@ -41,7 +41,7 @@ public class Application implements CommandLineRunner {
         if (options != null) {
             logger.debug("Scraping max [" + options.valueOf("p") + "]");
             List<Post> posts = hackerNewsScraper.scrape((Integer) options.valueOf("p"));
-            logger.info(hackerNewsScraper.asJson(posts));
+            System.out.println(hackerNewsScraper.asJson(posts));
         }
     }
 

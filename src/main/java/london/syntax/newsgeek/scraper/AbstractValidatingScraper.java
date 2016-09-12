@@ -4,9 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import london.syntax.newsgeek.model.Post;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Implements the basic Scraper and enforces validation Note the List of Posts
@@ -19,7 +18,7 @@ import org.springframework.stereotype.Service;
  */
 public abstract class AbstractValidatingScraper implements ValidatingScraper {
 
-    protected static Logger logger = LogManager.getLogger(AbstractValidatingScraper.class);
+    protected static Logger logger = LoggerFactory.getLogger(AbstractValidatingScraper.class);
 
     /**
      * Delegate the scraping logic to subclass

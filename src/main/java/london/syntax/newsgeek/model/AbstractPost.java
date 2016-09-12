@@ -4,10 +4,9 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Objects;
-import java.util.logging.Level;
 import london.syntax.newsgeek.exception.ScraperValidationException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Base implementation of Posts with the minimal attributes required
@@ -16,7 +15,7 @@ import org.apache.logging.log4j.Logger;
  */
 public abstract class AbstractPost implements Post {
 
-    private static final Logger logger = LogManager.getLogger(AbstractPost.class);
+    private static final Logger logger = LoggerFactory.getLogger(AbstractPost.class);
 
     private final String title;
     private final String uri;
