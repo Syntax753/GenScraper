@@ -8,19 +8,29 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 /**
- * Helper service to provide available options
+ * Class responsible for defining and parsing CLI options
+ *
+ * TODO: DTO to transfer back the options rather than a direct OptionSet as that
+ * presumes the caller is aware of the implementation used here
+ *
+ * TODO: Interface perhaps? I'm not sure what other input medium there'd be at
+ * this point other than CLI so leaving CLI only for now
  *
  * @author Peter Turner <syntax.valid@gmail.com>
  */
 @Service
 public class OptionProvider {
 
-    @Value("${newsgeek.stories.max}")
-    private final int maxPosts = 17;
+    private int maxPosts;
 
     private final OptionParser parser;
 
     public OptionProvider() {
+
+        // TODO: Bug here as the constructor is called before Spring bootstraps
+        // Maxposts so the splash screen will say default 0 but the right value
+        // is used once parse() is called. Probably just delegate this to a
+        // non-constructor (injected would probably work best)
         parser = new OptionParser() {
             {
                 acceptsAll(asList("p", "posts"), "max number of posts").withRequiredArg().ofType(Integer.class).defaultsTo(maxPosts);
@@ -49,9 +59,13 @@ public class OptionProvider {
     public void showHelp() throws Exception {
         parser.printHelpOn(System.err);
     }
-    
+
     public int getMaxPosts() {
         return maxPosts;
     }
 
+    @Value("${newsgeek.stories.max}")
+    public final void setMaxPosts(int maxPosts) {
+        this.maxPosts = maxPosts;
+    }
 }

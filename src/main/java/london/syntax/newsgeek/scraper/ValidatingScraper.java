@@ -15,7 +15,8 @@ public interface ValidatingScraper {
     List<Post> scrape(int max);
     
     /**
-     * Using Java 8's "default" implementation for util type methods
+     * Using Java 8's "default" implementation for thsi one but would probably
+     * be better in a dedicated util class or the abstract implementing class
      * 
      * @param posts Posts to be Jsonised. These will be sorted first
      * @return String representation

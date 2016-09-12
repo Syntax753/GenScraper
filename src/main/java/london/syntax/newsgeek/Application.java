@@ -33,10 +33,15 @@ public class Application implements CommandLineRunner {
         optionProvider.showHelp();
 
         OptionSet options = optionProvider.parse(args);
+        // Using null instead of handling exceptions in this case
         if (options != null) {
+            // make sure user hasn't specified more than the maximum set by the profile
             int trueMax = Math.min((Integer) options.valueOf("p"), optionProvider.getMaxPosts());
             System.err.println("Scraping max [" + trueMax + "] from [" + options.valueOf("p") + "," + optionProvider.getMaxPosts() + "]");
             List<Post> posts = hackerNewsScraper.scrape(trueMax);
+
+            // Only using System.out for the result. The rest is either System.err
+            // for console display such as usage or will be handled by a Logger and appended to a file
             System.out.println(hackerNewsScraper.asJson(posts));
         }
     }
