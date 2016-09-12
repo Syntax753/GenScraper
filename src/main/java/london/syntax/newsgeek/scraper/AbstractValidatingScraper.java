@@ -43,7 +43,7 @@ public abstract class AbstractValidatingScraper implements ValidatingScraper {
     private List<Post> validate(List<Post> posts) {
 
         if (posts == null) {
-            posts = Collections.EMPTY_LIST;
+            posts = new ArrayList<>();
         }
         List<Post> validPosts = new ArrayList<>(posts.size());
 

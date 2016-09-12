@@ -42,7 +42,6 @@ public class HackerNewsScraper extends AbstractValidatingScraper {
                 subtext = subtext.parent();
 
 //                logger.debug(subtext);
-
                 int score = 0;
                 Element scoreElem = subtext.getElementById("score_" + id);
                 try {
@@ -78,16 +77,20 @@ public class HackerNewsScraper extends AbstractValidatingScraper {
                 String author = subtext.getElementsByClass("hnuser").text();
 
                 News post = new News(score, comments, title, uri, author, rank);
-                posts.add(post);
-
-                max--;
-                if (max < 1) {
-                    break;
+                if (post.isValid()) {
+                    posts.add(post);
+                    
+                    max--;
+                    if (max < 1) {
+                        break;
+                    }
+                } else {
+                    logger.warn("Invalid post [" + post + "]. Skipping...");
                 }
             }
 
         } catch (IOException e) {
-            logger.error("Could not scrape HackerNews", e);
+            logger.error("Could not scrape HackerNews - probably connectivity issue", e);
         }
 
         return posts;
