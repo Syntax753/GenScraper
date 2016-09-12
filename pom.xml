@@ -3,21 +3,40 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>london.syntax</groupId>
     <artifactId>newsgeek</artifactId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1</version>
     <packaging>jar</packaging>
+        
+    <name>NewsGeek</name>
+
+    <!-- Using spring boot to manage depenency versions -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.4.0.RELEASE</version>
+        <relativePath/>
+    </parent>
+            
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <!-- Skip javadoc generation for now -->
-        <maven.javadoc.skip>true</maven.javadoc.skip>
+        
+        <!-- Override Spring boots default java version -->
+        <java.version>1.8</java.version>
+        
+        <!-- Versions not required with Spring boot -->
+        <!--        <version.log4j>2.6.2</version.log4j>
+        <version.spring>4.3.2.RELEASE</version.spring>-->
+        
+        <!-- Skip javadoc generation for now as not needed-->
+        <!-- <maven.javadoc.skip>true</maven.javadoc.skip> -->
     </properties>
 
     <profiles>
         <profile>
             <id>env-dev</id>
             <properties>
-                <!-- Each profile can set its own values or could look at having default values in perhaps an alwa6ys active profile -->
+                <!-- Each profile can set its own values or could look at having default values in perhaps an always active profile -->
                 <newsgeek.stories.max>100</newsgeek.stories.max>        
             </properties>
         </profile>
@@ -25,7 +44,6 @@
         <profile>
             <id>env-test</id>
             <properties>
-                <!-- Each profile can set its own values or could look at having default values in perhaps an alwa6ys active profile -->
                 <newsgeek.stories.max>100</newsgeek.stories.max>        
             </properties>
         </profile>
@@ -33,11 +51,74 @@
         <profile>
             <id>env-prod</id>
             <properties>
-                <!-- Each profile can set its own values or could look at having default values in perhaps an alwa6ys active profile -->
                 <newsgeek.stories.max>100</newsgeek.stories.max>      
             </properties>
         </profile>
     </profiles>
+    
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>-->
+        <!--        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-</artifactId>
+        </dependency>-->
+        <!-- For all things Marshall/Unmarshal -from Pojo to JSON in this case -->
+        <!--        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>-->
+        <!-- Minimal Spring for dependency injection -->
+        <!--        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>-->
+        <!-- Logging -->
+        <!--        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+        </dependency>-->
+        <!-- html scraping -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.7</version>
+        </dependency>
+    </dependencies>
     
     <build>
         <finalName>newsgeek</finalName>
@@ -59,14 +140,14 @@
                         </goals>
                         <configuration>
                             <outputFile>
-                                ${project.basedir}/src/main/resources/config.properties
+                                ${project.basedir}/src/main/resources/application.properties
                             </outputFile>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
             
-            <!-- SOme default lifecycle plugins. Probably better to move them to the parent pom so they aren't repeted in every project pom -->
+            <!-- Some default lifecycle plugins. Probably better to move them to the parent pom so they aren't repeted in every project pom -->
             <!-- Maven throws warnings if at least the version haven't been set for these -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -83,6 +164,12 @@
                 <artifactId>maven-deploy-plugin</artifactId>
                 <version>2.8.2</version>
             </plugin>
+            <!-- Use Spring boot to make executable jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
         </plugins>   
     </build>
+
 </project>
