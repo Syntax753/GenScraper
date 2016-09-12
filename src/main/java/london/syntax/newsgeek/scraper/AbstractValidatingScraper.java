@@ -24,19 +24,21 @@ public abstract class AbstractValidatingScraper implements ValidatingScraper {
     /**
      * Delegate the scraping logic to subclass
      *
+     * @param max Maximum number of posts to scrape
      * @return posts All the scraped posts from the relevant site
      */
-    protected abstract List<Post> scrapeInternal();
+    protected abstract List<Post> scrapeInternal(int max);
 
     /**
      * Full scraping workflow - enforces validation after scraping
      *
+     * @param max Maximum number of posts to scrape
      * @return posts All the valid posts
      */
     @Override
-    public final List<Post> scrape() {
-
-        return validate(scrapeInternal());
+    public final List<Post> scrape(int max) {
+        logger.debug("Scraping [" + max + "] posts");
+        return validate(scrapeInternal(max));
     }
 
     private List<Post> validate(List<Post> posts) {
@@ -53,7 +55,7 @@ public abstract class AbstractValidatingScraper implements ValidatingScraper {
             }
 
         }
-        logger.debug("Found [" + posts.size() + "] valid posts");
+        logger.debug("Found [" + validPosts.size() + "] valid posts");
 
         return validPosts;
     }

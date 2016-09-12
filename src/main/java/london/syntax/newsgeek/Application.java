@@ -1,13 +1,16 @@
 package london.syntax.newsgeek;
 
-import com.google.gson.Gson;
-import java.util.Collections;
+import static java.util.Arrays.asList;
 import java.util.List;
+import joptsimple.OptionException;
+import joptsimple.OptionParser;
+import joptsimple.OptionSet;
 import london.syntax.newsgeek.model.Post;
 import london.syntax.newsgeek.scraper.ValidatingScraper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,6 +25,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
+    @Value("${newsgeek.stories.max}")
+    private int maxPosts;
+
     private static final Logger logger = LogManager.getLogger(Application.class);
 
     private ValidatingScraper hackerNewsScraper;
@@ -30,18 +36,37 @@ public class Application implements CommandLineRunner {
     public void run(String... args) throws Exception {
         logger.debug("Initialising newsgeek...");
 
-        if (parse()) {
-            List<Post> posts = hackerNewsScraper.scrape();
+        OptionSet options = parse(args);
+
+        if (options != null) {
+            logger.debug("Scraping max [" + options.valueOf("p") + "]");
+            List<Post> posts = hackerNewsScraper.scrape((Integer) options.valueOf("p"));
             logger.info(hackerNewsScraper.asJson(posts));
         }
     }
 
-    private boolean parse() {
-        boolean success = false;
+    private OptionSet parse(String... args) throws Exception {
+        OptionSet ret = null;
 
-        success = true;
+        OptionParser parser = new OptionParser() {
+            {
+                acceptsAll(asList("p", "posts"), "max number of posts").withRequiredArg().ofType(Integer.class).defaultsTo(maxPosts);
+                acceptsAll(asList("h", "?"), "show help").forHelp();
+            }
+        };
 
-        return success;
+        try {
+            OptionSet options = parser.parse(args);
+            if (options.has("h")) {
+                parser.printHelpOn(System.err);
+            } else {
+                ret = options;
+            }
+        } catch (OptionException e) {
+            parser.printHelpOn(System.err);
+        }
+
+        return ret;
     }
 
     /**

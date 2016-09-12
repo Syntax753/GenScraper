@@ -19,11 +19,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class HackerNewsScraper extends AbstractValidatingScraper {
 
-    private int max = 10;
-
     @Override
-    protected final List<Post> scrapeInternal() {
-        List<Post> posts = new ArrayList<>(10);
+    protected final List<Post> scrapeInternal(int max) {
+        List<Post> posts = new ArrayList<>(max);
 
         try {
             Document doc = Jsoup.connect("https://news.ycombinator.com/").get();

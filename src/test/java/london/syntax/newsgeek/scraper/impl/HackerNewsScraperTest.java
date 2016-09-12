@@ -8,11 +8,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  *
  * @author Peter Turner <syntax.valid@gmail.com>
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest
 public class HackerNewsScraperTest {
 
     public HackerNewsScraperTest() {
@@ -42,7 +47,7 @@ public class HackerNewsScraperTest {
         System.out.println("scrapeInternal");
         HackerNewsScraper instance = new HackerNewsScraper();
 
-        List<Post> posts = instance.scrapeInternal();
+        List<Post> posts = instance.scrapeInternal(10);
         assertNotNull("Posts should not be null", posts);
 
         System.out.println(posts.size());

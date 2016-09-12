@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Peter Turner <syntax.valid@gmail.com>
  */
-public abstract class AbstractPost implements Post{
+public abstract class AbstractPost implements Post {
 
     private static final Logger logger = LogManager.getLogger(AbstractPost.class);
 
@@ -56,7 +56,7 @@ public abstract class AbstractPost implements Post{
         }
 
         if (getRank() < 0) {
-            throw new ScraperValidationException("Rank [" + getRank() + "]must not be negative");
+            throw new ScraperValidationException("Rank [" + getRank() + "] must not be negative");
         }
 
         try {
@@ -64,7 +64,7 @@ public abstract class AbstractPost implements Post{
             URL url = new URL(getUri());
             url.toURI();
         } catch (MalformedURLException | URISyntaxException e) {
-            throw new ScraperValidationException("URI is invalid [" + getUri() + "]", e);
+            throw new ScraperValidationException("URI is invalid [" + getUri() + "]");
         }
 
         validateInternal();

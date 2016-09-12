@@ -12,8 +12,8 @@ import london.syntax.newsgeek.model.Post;
  */
 public interface ValidatingScraper {
 
-    List<Post> scrape();
-
+    List<Post> scrape(int max);
+    
     /**
      * Using Java 8's "default" implementation for util type methods
      * 

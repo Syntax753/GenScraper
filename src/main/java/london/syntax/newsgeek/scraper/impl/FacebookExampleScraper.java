@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class FacebookExampleScraper extends AbstractValidatingScraper {
 
     @Override
-    protected List<Post> scrapeInternal() {
+    protected final List<Post> scrapeInternal(int max) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
  }
