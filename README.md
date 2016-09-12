@@ -23,7 +23,15 @@ Top stories fetched from hackernews.com and JSON outputted
 >> number N of stories to fetch. Currently limited to 100 max to avoid abusing their bandwidth
 
 ## Installation ##
-TBD
+As GitHub doesn't support binary downloads, this will need to be built locally.
+All these commands should be run from project root and require maven (3+) and Java 8.
+
+For executable Jar:
+mvn -Penv-prod clean package
+
+> And then run the executable jar via
+> java -jar ./target/newsgeek.jar
+
 
 ## Reporting bugs ##
 Just drop me an email for now until I look into a Trello board or similar

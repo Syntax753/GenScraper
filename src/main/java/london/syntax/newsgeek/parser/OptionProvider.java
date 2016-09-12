@@ -31,9 +31,12 @@ public class OptionProvider {
         // Maxposts so the splash screen will say default 0 but the right value
         // is used once parse() is called. Probably just delegate this to a
         // non-constructor (injected would probably work best)
+        // Workaround: Have hidden default value since it's profile based and more
+        // of a limit than a user defined numbe
+              
         parser = new OptionParser() {
             {
-                acceptsAll(asList("p", "posts"), "max number of posts").withRequiredArg().ofType(Integer.class).defaultsTo(maxPosts);
+                acceptsAll(asList("p", "posts"), "max number of posts").withRequiredArg().ofType(Integer.class);
                 acceptsAll(asList("h", "?"), "show help").forHelp();
             }
         };
