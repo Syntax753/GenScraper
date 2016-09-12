@@ -34,8 +34,9 @@ public class Application implements CommandLineRunner {
 
         OptionSet options = optionProvider.parse(args);
         if (options != null) {
-            logger.debug("Scraping max [" + options.valueOf("p") + "]");
-            List<Post> posts = hackerNewsScraper.scrape((Integer) options.valueOf("p"));
+            int trueMax = Math.min((Integer) options.valueOf("p"), optionProvider.getMaxPosts());
+            System.err.println("Scraping max [" + trueMax + "] from [" + options.valueOf("p") + "," + optionProvider.getMaxPosts() + "]");
+            List<Post> posts = hackerNewsScraper.scrape(trueMax);
             System.out.println(hackerNewsScraper.asJson(posts));
         }
     }

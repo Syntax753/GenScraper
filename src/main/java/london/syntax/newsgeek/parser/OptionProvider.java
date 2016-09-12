@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 public class OptionProvider {
 
     @Value("${newsgeek.stories.max}")
-    private final int maxPosts = 10;
+    private final int maxPosts = 17;
 
     private final OptionParser parser;
 
@@ -48,6 +48,10 @@ public class OptionProvider {
 
     public void showHelp() throws Exception {
         parser.printHelpOn(System.err);
+    }
+    
+    public int getMaxPosts() {
+        return maxPosts;
     }
 
 }
