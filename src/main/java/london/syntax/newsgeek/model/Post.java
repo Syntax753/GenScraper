@@ -7,7 +7,7 @@ import london.syntax.newsgeek.exception.ScraperValidationException;
  *
  * @author Peter Turner <syntax.valid@gmail.com>
  */
-public interface Post {
+public interface Post extends Comparable<Post> {
 
     String getTitle();
 
@@ -31,11 +31,4 @@ public interface Post {
      */
     boolean isValid();
 
-    /**
-     * Json representation of post
-     * TODO: enum for various output formats
-     * 
-     * @return json representation of post
-     */
-    String asJson();
 }

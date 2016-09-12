@@ -1,6 +1,7 @@
 package london.syntax.newsgeek;
 
 import com.google.gson.Gson;
+import java.util.Collections;
 import java.util.List;
 import london.syntax.newsgeek.model.Post;
 import london.syntax.newsgeek.scraper.ValidatingScraper;
@@ -31,9 +32,7 @@ public class Application implements CommandLineRunner {
 
         if (parse()) {
             List<Post> posts = hackerNewsScraper.scrape();
-
-            logger.info(new Gson().toJson(posts));
-
+            logger.info(hackerNewsScraper.asJson(posts));
         }
     }
 

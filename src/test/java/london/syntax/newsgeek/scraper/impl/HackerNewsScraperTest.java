@@ -14,22 +14,22 @@ import static org.junit.Assert.*;
  * @author Peter Turner <syntax.valid@gmail.com>
  */
 public class HackerNewsScraperTest {
-    
+
     public HackerNewsScraperTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -44,13 +44,13 @@ public class HackerNewsScraperTest {
 
         List<Post> posts = instance.scrapeInternal();
         assertNotNull("Posts should not be null", posts);
-        
+
         System.out.println(posts.size());
         assertTrue("Should have scraped some posts", posts.size() > 0);
-        
-        for (Post post:posts) {
+
+        posts.stream().forEach((post) -> {
             System.out.println(post);
-        }
+        });
     }
-    
+
 }

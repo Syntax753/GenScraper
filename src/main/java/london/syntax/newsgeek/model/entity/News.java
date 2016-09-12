@@ -35,11 +35,11 @@ public class News extends AbstractPost {
     @Override
     protected void validateInternal() throws ScraperValidationException {
         if (points < 0) {
-            throw new ScraperValidationException("Points must not be negative");
+            throw new ScraperValidationException("Points must not be negative [" + points + "]");
         }
 
         if (comments < 0) {
-            throw new ScraperValidationException("Comments must not be negative");
+            throw new ScraperValidationException("Comments must not be negative [" + comments + "]");
         }
     }
 }

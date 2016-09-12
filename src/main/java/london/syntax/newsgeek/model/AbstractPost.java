@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
  *
  * @author Peter Turner <syntax.valid@gmail.com>
  */
-public abstract class AbstractPost implements Post, Comparable<AbstractPost> {
+public abstract class AbstractPost implements Post{
 
     private static final Logger logger = LogManager.getLogger(AbstractPost.class);
 
@@ -91,11 +91,6 @@ public abstract class AbstractPost implements Post, Comparable<AbstractPost> {
     }
 
     @Override
-    public String asJson() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
     public int hashCode() {
         int hash = 7;
         hash = 67 * hash + Objects.hashCode(this.title);
@@ -128,11 +123,11 @@ public abstract class AbstractPost implements Post, Comparable<AbstractPost> {
      * Ordering for top x output
      *
      * @param o to compare to
-     * @return Order by rank inc then title alphabetically inc
+     * @return Order by rank then title
      */
     @Override
-    public int compareTo(AbstractPost o) {
-        if (this.rank != o.getRank()) {
+    public int compareTo(Post o) {
+        if (this.rank == o.getRank()) {
             return (this.getTitle().compareTo(o.getTitle()));
         }
 
