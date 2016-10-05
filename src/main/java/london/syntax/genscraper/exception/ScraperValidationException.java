@@ -1,4 +1,4 @@
-package london.syntax.newsgeek.exception;
+package london.syntax.genscraper.exception;
 
 /**
  * (unchecked) Exception for any validation issues

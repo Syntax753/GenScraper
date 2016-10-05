@@ -1,7 +1,8 @@
 package london.syntax.newsgeek.scraper.impl;
 
+import london.syntax.genscraper.scraper.impl.HackerNewsScraper;
 import java.util.List;
-import london.syntax.newsgeek.model.Post;
+import london.syntax.genscraper.model.Post;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -1,5 +1,6 @@
 package london.syntax.newsgeek;
 
+import london.syntax.genscraper.Application;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

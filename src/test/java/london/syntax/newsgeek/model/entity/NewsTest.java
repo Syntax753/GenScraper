@@ -1,9 +1,10 @@
 package london.syntax.newsgeek.model.entity;
 
+import london.syntax.genscraper.model.entity.News;
 import java.util.ArrayList;
 import java.util.List;
-import london.syntax.newsgeek.exception.ScraperValidationException;
-import london.syntax.newsgeek.model.Post;
+import london.syntax.genscraper.exception.ScraperValidationException;
+import london.syntax.genscraper.model.Post;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

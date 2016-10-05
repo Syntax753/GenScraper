@@ -1,4 +1,4 @@
-package london.syntax.newsgeek.parser;
+package london.syntax.genscraper.activity;
 
 import static java.util.Arrays.asList;
 import joptsimple.OptionException;
@@ -19,13 +19,13 @@ import org.springframework.stereotype.Service;
  * @author Peter Turner <syntax.valid@gmail.com>
  */
 @Service
-public class OptionProvider {
+public class OptionParserService {
 
     private int maxPosts;
 
     private final OptionParser parser;
 
-    public OptionProvider() {
+    public OptionParserService() {
 
         // TODO: Bug here as the constructor is called before Spring bootstraps
         // Maxposts so the splash screen will say default 0 but the right value

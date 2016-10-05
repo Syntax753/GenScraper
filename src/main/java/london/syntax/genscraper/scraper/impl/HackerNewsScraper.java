@@ -1,16 +1,17 @@
-package london.syntax.newsgeek.scraper.impl;
+package london.syntax.genscraper.scraper.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import london.syntax.newsgeek.model.Post;
-import london.syntax.newsgeek.model.entity.News;
-import london.syntax.newsgeek.scraper.AbstractValidatingScraper;
+import london.syntax.genscraper.model.Post;
+import london.syntax.genscraper.model.entity.News;
+import london.syntax.genscraper.scraper.AbstractValidatingScraper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.Errors;
 
 /**
  *
@@ -76,17 +77,19 @@ public class HackerNewsScraper extends AbstractValidatingScraper {
                 String uri = element.getElementsByClass("storylink").attr("href");
                 String author = subtext.getElementsByClass("hnuser").text();
 
-                News post = new News(score, comments, title, uri, author, rank);
-                if (post.isValid()) {
-                    posts.add(post);
-                    
-                    max--;
-                    if (max < 1) {
-                        break;
-                    }
-                } else {
-                    logger.warn("Invalid post [" + post + "]. Skipping...");
-                }
+                News post = new News(title, uri, "", rank, author, score, comments);
+                posts.add(post);
+                
+//                if (post.isValid()) {
+//                    posts.add(post);
+//                    
+//                    max--;
+//                    if (max < 1) {
+//                        break;
+//                    }
+//                } else {
+//                    logger.warn("Invalid post [" + post + "]. Skipping...");
+//                }
             }
 
         } catch (IOException e) {
@@ -94,5 +97,15 @@ public class HackerNewsScraper extends AbstractValidatingScraper {
         }
 
         return posts;
+    }
+
+    @Override
+    public boolean supports(Class<?> type) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void validate(Object o, Errors errors) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -1,16 +1,16 @@
-package london.syntax.newsgeek;
+package london.syntax.genscraper;
 
 import java.util.List;
 import joptsimple.OptionSet;
-import london.syntax.newsgeek.parser.OptionProvider;
-import london.syntax.newsgeek.model.Post;
-import london.syntax.newsgeek.scraper.ValidatingScraper;
+import london.syntax.genscraper.activity.OptionParserService;
+import london.syntax.genscraper.model.Post;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import london.syntax.genscraper.scraper.Scraper;
 
 /**
  * Application entry point
@@ -24,12 +24,12 @@ public class Application implements CommandLineRunner {
 
     private static final Logger logger = LoggerFactory.getLogger(Application.class);
 
-    private ValidatingScraper hackerNewsScraper;
-    private OptionProvider optionProvider;
+    private Scraper hackerNewsScraper;
+    private OptionParserService optionProvider;
 
     @Override
     public void run(String... args) throws Exception {
-        logger.debug("Initialising newsgeek...");
+        logger.debug("Initialising genscraper via cli...");
         optionProvider.showHelp();
 
         OptionSet options = optionProvider.parse(args);
@@ -62,12 +62,12 @@ public class Application implements CommandLineRunner {
     }
 
     @Autowired
-    public void setHackerNewsScraper(ValidatingScraper hackerNewsScraper) {
+    public void setHackerNewsScraper(Scraper hackerNewsScraper) {
         this.hackerNewsScraper = hackerNewsScraper;
     }
 
     @Autowired
-    public void setOptionProvider(OptionProvider optionProvider) {
+    public void setOptionProvider(OptionParserService optionProvider) {
         this.optionProvider = optionProvider;
     }
 }

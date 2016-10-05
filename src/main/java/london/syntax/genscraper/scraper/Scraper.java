@@ -1,22 +1,21 @@
-package london.syntax.newsgeek.scraper;
+package london.syntax.genscraper.scraper;
 
 import com.google.gson.Gson;
 import java.util.Collections;
 import java.util.List;
-import london.syntax.newsgeek.model.Post;
+import london.syntax.genscraper.model.Post;
 
 /**
  * Scraper interface for scraping and validating online posts
  *
  * @author Peter Turner <syntax.valid@gmail.com>
  */
-public interface ValidatingScraper {
+public interface Scraper {
 
     List<Post> scrape(int max);
     
     /**
-     * Using Java 8's "default" implementation for thsi one but would probably
-     * be better in a dedicated util class or the abstract implementing class
+     * Convert List to json using Java 8 "default implementation"
      * 
      * @param posts Posts to be Jsonised. These will be sorted first
      * @return String representation

@@ -1,6 +1,6 @@
-package london.syntax.newsgeek.model;
+package london.syntax.genscraper.model;
 
-import london.syntax.newsgeek.exception.ScraperValidationException;
+import london.syntax.genscraper.exception.ScraperValidationException;
 
 /**
  * Interface for common attributes shared among online posts/articles/blogs etc
@@ -13,7 +13,7 @@ public interface Post extends Comparable<Post> {
 
     String getUri();
 
-    String getAuthor();
+    String getContent();
 
     /**
      * Ranking for ordering
@@ -22,13 +22,13 @@ public interface Post extends Comparable<Post> {
      */
     int getRank();
 
-    void validate() throws ScraperValidationException;
-
-    /**
-     * Each post implements the business rules to self-validate
-     *
-     * @return whether the post is valid
-     */
-    boolean isValid();
+//    void validate() throws ScraperValidationException;
+//
+//    /**
+//     * Each post implements the business rules to self-validate
+//     *
+//     * @return whether the post is valid
+//     */
+//    boolean isValid();
 
 }

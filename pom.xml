@@ -2,17 +2,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>london.syntax</groupId>
-    <artifactId>newsgeek</artifactId>
+    <artifactId>genscraper</artifactId>
     <version>0.1</version>
     <packaging>jar</packaging>
         
-    <name>NewsGeek</name>
+    <name>GenScraper</name>
 
     <!-- Using spring boot to manage depenency versions -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.4.0.RELEASE</version>
+        <version>1.4.1.RELEASE</version>
         <relativePath/>
     </parent>
             
@@ -23,10 +23,6 @@
         
         <!-- Override Spring boots default java version -->
         <java.version>1.8</java.version>
-        
-        <!-- Versions not required with Spring boot -->
-        <!--        <version.log4j>2.6.2</version.log4j>
-        <version.spring>4.3.2.RELEASE</version.spring>-->
         
         <!-- Skip javadoc generation for now as not needed-->
         <!-- <maven.javadoc.skip>true</maven.javadoc.skip> -->
@@ -65,53 +61,25 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
-            <!--            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-logging</artifactId>
-                </exclusion>
-            </exclusions>-->
         </dependency>
-        <!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-log4j2</artifactId>
-        </dependency>-->
-        <!--        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-</artifactId>
-        </dependency>-->
-        <!-- For all things Marshall/Unmarshal -from Pojo to JSON in this case -->
-        <!--        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>-->
-        <!-- Minimal Spring for dependency injection -->
-        <!--        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+        
+        <!-- validation using annotations -->  
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
         </dependency>
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-        </dependency>-->
-        <!-- Logging -->
-        <!--        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.3.2.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-        </dependency>-->
+		
         <!-- html scraping -->
         <dependency>
             <groupId>org.jsoup</groupId>
@@ -163,7 +131,7 @@
                 </executions>
             </plugin>-->
             
-            <!-- Some default lifecycle plugins. Probably better to move them to the parent pom so they aren't repeted in every project pom -->
+            <!-- Some default lifecycle plugins. Probably better to move them to the parent pom so they aren't repeated in every project pom -->
             <!-- Maven throws warnings if at least the version haven't been set for these -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -196,7 +164,7 @@
                     <skipTests>${skipTests}</skipTests>
                 </configuration>
             </plugin>
-            <plugin>
+            <!--            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.12</version>
@@ -211,8 +179,7 @@
                         </resource>
                     </resources>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>   
     </build>
-
 </project>
