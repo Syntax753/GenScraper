@@ -1,4 +1,4 @@
-package london.syntax.newsgeek;
+package london.syntax.genscraper;
 
 import london.syntax.genscraper.Application;
 import org.junit.After;

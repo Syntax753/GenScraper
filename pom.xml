@@ -74,11 +74,11 @@
             <artifactId>validation-api</artifactId>
             <version>1.1.0.Final</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>4.3.2.Final</version>
-        </dependency>
+        </dependency>-->
 		
         <!-- html scraping -->
         <dependency>

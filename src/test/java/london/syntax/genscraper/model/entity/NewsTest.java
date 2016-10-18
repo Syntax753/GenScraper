@@ -1,4 +1,4 @@
-package london.syntax.newsgeek.model.entity;
+package london.syntax.genscraper.model.entity;
 
 import london.syntax.genscraper.model.entity.News;
 import java.util.ArrayList;
@@ -23,12 +23,12 @@ public class NewsTest {
 
     private List<Post> posts = new ArrayList<>();
 
-    Post badPoints = new News(-1, 1, "Title", "http://google.com", "Author", 1);
-    Post badComments = new News(1, -1, "Title", "http://google.com", "Author", 1);
-    Post badTitle = new News(1, 1, "", "http://google.com", "Author", 1);
-    Post badUri = new News(1, 1, "Title", "/google.com", "Author", 1);
-    Post badAuthor = new News(1, 1, "Title", "http://google.com", "", 1);
-    Post badRank = new News(1, 1, "Title", "http://google.com", "Author", -1);
+    Post badPoints = new News("Title", "http://google.com", "", 1, "Author", -1,1);
+//    Post badComments = 
+//    Post badTitle = 
+//    Post badUri = 
+//    Post badAuthor = 
+//    Post badRank = 
 
     public NewsTest() {
     }

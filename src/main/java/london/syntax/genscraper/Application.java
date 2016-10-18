@@ -11,6 +11,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import london.syntax.genscraper.scraper.Scraper;
+import org.springframework.context.annotation.Bean;
+import org.springframework.validation.Validator;
 
 /**
  * Application entry point
@@ -42,7 +44,7 @@ public class Application implements CommandLineRunner {
             } else {
                 choice = Math.min(choice, optionProvider.getMaxPosts());
             }
-            
+
             System.err.println("Scraping max [" + choice + "] posts from [" + options.valueOf("p") + "," + optionProvider.getMaxPosts() + "]");
             List<Post> posts = hackerNewsScraper.scrape(choice);
 
@@ -69,5 +71,11 @@ public class Application implements CommandLineRunner {
     @Autowired
     public void setOptionProvider(OptionParserService optionProvider) {
         this.optionProvider = optionProvider;
+    }
+
+    // jsr-303/439
+    @Bean
+    public Validator validator() {
+        return new org.springframework.validation.beanvalidation.LocalValidatorFactoryBean();
     }
 }

@@ -1,4 +1,4 @@
-package london.syntax.newsgeek.scraper.impl;
+package london.syntax.genscraper.scraper.impl;
 
 import london.syntax.genscraper.scraper.impl.HackerNewsScraper;
 import java.util.List;
